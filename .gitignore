@@ -1,0 +1,8 @@
+node_modules
+.env
+*.log
+demo.mp4
+data/
+video-build/raw/
+video-build/*.mp3
+video-build/timeline.json

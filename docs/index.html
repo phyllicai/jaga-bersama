@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jaga Bersama: care for Mak, together</title>
+<meta name="description" content="An AI agent that turns a family's WhatsApp-style messages into a fair eldercare split and settles it through a PayPal family care fund, with every money move approved by a sibling.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><img src="favicon.svg" alt="" width="34" height="34"><div><h1>Jaga Bersama</h1><p>Care for <span data-k="parent">Mak</span>, together. Fairly.</p></div></div>
+  <div class="modes"><span id="mode-pp" class="badge"></span><span id="mode-ai" class="badge soft"></span><button id="reset" class="ghost" title="Start over with the demo family">Reset demo</button></div>
+</header>
+<div id="mock-note" class="note" hidden>Demo mode: PayPal calls go to a built-in mock that returns the same JSON shapes as the PayPal sandbox (Invoicing v2, Orders v2, Payouts v1). No real money and no PayPal account are involved. This GitHub Pages copy runs entirely in your browser; clone the repo and add sandbox keys to call the real PayPal sandbox.</div>
+<main>
+  <section class="col chat">
+    <div class="card fill">
+      <div class="card-h"><h2>Family chat</h2><span class="muted" id="fam-line"></span></div>
+      <div id="log" class="log" aria-live="polite"></div>
+      <div class="chips" id="chips"></div>
+      <form id="say" class="say">
+        <select id="speaker" aria-label="Speaking as"></select>
+        <textarea id="text" rows="2" placeholder="e.g. Paid RM85 for Mak's clinic visit today / Saya jaga Mak 6 jam"></textarea>
+        <button class="primary" type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+  <section class="col side">
+    <div class="card">
+      <div class="card-h"><h2 id="month-h">This month</h2><span class="muted" id="fund-line"></span></div>
+      <div class="stats" id="stats"></div>
+      <div id="split"></div>
+      <p class="muted small" id="explain-rule"></p>
+    </div>
+    <div class="card" id="props-card">
+      <div class="card-h"><h2>Needs a sibling's OK</h2><span class="muted small">The agent proposes. People approve. Then PayPal moves the money.</span></div>
+      <div id="props"></div>
+    </div>
+    <div class="card">
+      <div class="card-h"><h2>PayPal</h2><button id="refresh" class="ghost small">Sync with PayPal</button></div>
+      <div id="pp"></div>
+    </div>
+    <div class="card">
+      <div class="card-h"><h2>Ledger</h2><span class="muted small" id="ledger-n"></span></div>
+      <div id="ledger"></div>
+    </div>
+    <details class="card">
+      <summary><h2>Audit trail &amp; PayPal API calls</h2></summary>
+      <div class="two"><div><h3>Audit</h3><ol id="audit" class="mono"></ol></div><div><h3>API calls</h3><ol id="calls" class="mono"></ol></div></div>
+    </details>
+  </section>
+</main>
+<footer>Jaga Bersama is an open-source PayPal AI Hackathon entry. Demo family and emails are fictional. <a href="https://github.com/phyllicai/jaga-bersama">Source (MIT)</a></footer>
+
+<dialog id="checkout">
+  <form method="dialog" class="pp-sheet">
+    <div class="pp-head"><span class="pp-logo">PayPal</span><span class="badge">sandbox (simulated)</span></div>
+    <p id="co-desc"></p>
+    <p class="big" id="co-amt"></p>
+    <p class="muted small">In sandbox or live mode this is PayPal's own approval page. The demo simulates the buyer clicking "Pay".</p>
+    <div class="row"><button value="cancel" class="ghost">Cancel</button><button value="pay" class="pp-btn" id="co-pay">Pay with PayPal</button></div>
+  </form>
+</dialog>
+<script type="module" src="local-api.js"></script>
+</body>
+</html>

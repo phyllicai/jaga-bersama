@@ -1,0 +1,16 @@
+{
+  "name": "jaga-bersama",
+  "version": "1.0.0",
+  "description": "AI care-cost agent for families looking after an elderly parent: turns WhatsApp-style messages into a shared ledger, works out a fair split that counts caregiving time, and settles it with PayPal Invoicing, Orders and Payouts (sandbox).",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test test/",
+    "mcp": "node mcp.js",
+    "smoke:sandbox": "node scripts/smoke-sandbox.js",
+    "build:static": "node scripts/build-static.js"
+  }
+}
